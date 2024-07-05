@@ -1,4 +1,4 @@
-"1. Add data_gumentation.py in the code folder to the /home/downloads/data/retriever path while downloading the DPR model." ## You can generate data with this.
+1. Add data_gumentation.py in the code folder to the /home/downloads/data/retriever path while downloading the DPR model." ## You can generate data with this.
 
 You can find the DPR model here. (https://github.com/facebookresearch/DPR)
 
