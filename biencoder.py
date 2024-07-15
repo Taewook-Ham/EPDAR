@@ -276,44 +276,18 @@ class BiEncoder(nn.Module):
             # else:
             #     positive_ctx = sample.positive_passages[0]
 
-            # 수정된 부분 시작
-            if "judicial" or "judges" or "court" or "justices" or "judgeship" or "y&r" in sample.query.lower():
-                # "warning" or "Americas advisory" or "diplomatic" or "caution" or "intercontinental" or "Bermuda" or "age" or "phyllis" or
-                # If "who" is in the query, select positive passage with title "Generated"
-                #positive_ctxs = sample.positive_passages
-                # positive passages 중에서 "Generated" 타이틀을 가진 문장 중에서 answer가 포함된 것을 선택
-                #positive_ctx = next((ctx for ctx in sample.positive_passages if ctx.title == "Generated" and ctx.answer is not None), None)
-                positive_ctx = next(
-                    (ctx for ctx in sample.positive_passages if ctx.title == "Generated" and any(answer.lower() in ctx.text.lower() for answer in sample.answers)),
-                    None
-                )
-                xfhcgjcfgjcfjtcfjtcfhsewzfggsxrdxddwadwawdaadwdasdawdasdzxc
-                # 만약 "Generated" 타이틀을 가진 문장 중에서 answer가 없다면 0번째 문장을 선택
-                if positive_ctx is None:
-                    positive_ctx = sample.positive_passages[0]
-                #positive_ctxs = [ctx for ctx in sample.positive_passages if ctx.title == "Generated"]
-                # if not positive_ctxs:
-                #     # If no positive passage with title "Generated" is found, use the first positive passage
-                #     positive_ctx = sample.positive_passages[0]
-                # else:
-                #     positive_ctx = positive_ctxs[np.random.choice(len(positive_ctxs))]
+            
+            
+            
+
+            if shuffle and shuffle_positives:
+                positive_ctxs = sample.positive_passages
+                positive_ctx = next((ctx for ctx in positive_ctxs if ctx.title == "Generated"), None)
             else:
-                # If "who" is not in the query, select the first positive passage
-                positive_ctx = sample.positive_passages[0]
+                positive_ctx = next((ctx for ctx in sample.positive_passages if ctx.title == "Generated"), None)
 
             if positive_ctx is None or sample:
-                positive_ctx = sample.positive_passages[0]
-            # 수정된 부분 끝
-
-            # if shuffle and shuffle_positives:
-            #     positive_ctxs = sample.positive_passages
-            #     positive_ctx = next((ctx for ctx in positive_ctxs if ctx.title == "Generated"), None)
-            # else:
-            #     positive_ctx = next((ctx for ctx in sample.positive_passages if ctx.title == "Generated"), None)
-
-            # if positive_ctx is None or sample:
-            #     # 처리할 "title"이 "Generated"인 문장이 없는 경우 예외 처리 또는 기본값 설정
-            #     positive_ctx = sample.positive_passages[0]  # 또는 다른 문장으로 대체
+            
 
             neg_ctxs = sample.negative_passages
             hard_neg_ctxs = sample.hard_negative_passages
