@@ -10,3 +10,6 @@ You can find the DPR model here. (https://github.com/facebookresearch/DPR)
 
    
 4. Analyzing with data_an.ipynb"
+
+
+Data: 10.5281/zenodo.12663127
